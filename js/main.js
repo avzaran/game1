@@ -1,25 +1,24 @@
-const { JSDOM } = require('jsdom');
-const dom = new JSDOM('<!DOCTYPE html><html><body></body></html>');
-const document = dom.window.document;
 
-// Теперь можно использовать document
-
-// прием выбора игрока
 const rockBtn = document.querySelector('.rock');
 const paperBtn = document.querySelector('.paper');
 const scissorsBtn = document.querySelector('.scissors');
+let playerSelection = null;
 
-let gameRes = playRound()
-let computerSelection = getCompChoice()
+let computerSelection = getCompChoice();
+let gameRes = playRound(playerSelection, computerSelection);
+console.log(gameRes);
 
-rockBtn.addEventListener('click', () => playerClick('Rock'));
-paperBtn.addEventListener('click', () => playerClick('Paper'));
-scissorsBtn.addEventListener('click', () => playerClick('Scissors'));
+rockBtn?.addEventListener('click', () => playerClick('Rock'));
+paperBtn?.addEventListener('click', () => playerClick('Paper'));
+scissorsBtn?.addEventListener('click', () => playerClick('Scissors'));
 
 
 function playerClick (playerChoice){
     playerSelection = playerChoice;
-    return playerSelection
+    let computerSelection = getCompChoice();
+    gameRes = playRound(playerSelection, computerSelection);
+    console.log (gameRes);
+    return gameRes
 }
 
 
@@ -38,24 +37,26 @@ function getCompChoice (){
     }
     return compChoice
 }
-// console.log (computerSelection);
+
 
 function playRound(playerSelection, computerSelection) {
-    let gameRes
-    if (playerSelection === computerSelection){
-        gameRes = "it's a tie"
+    let game = null;
+    if (playerSelection == computerSelection){
+        return game = "it's a tie"
     }
-    else if (
+    if (
         (playerSelection == 'Rock' && computerSelection == 'Scissors') ||
         (playerSelection == 'Paper' && computerSelection == 'Rock') ||
         (playerSelection == 'Scissors' && computerSelection == 'Paper')
     ){
-    gameRes = "You Win"}
-    else {
-        gameRes = "You Lose"
+    game = "You Win"
     }
-    return gameRes
+    else {
+        game = "You Lose"
+    }
+    return game
 }
 
-console.log (gameRes)
+document.querySelector('.gameResult').textContent = gameRes;
+
 
