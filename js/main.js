@@ -18,6 +18,7 @@ function playerClick (playerChoice){
     let computerSelection = getCompChoice();
     gameRes = playRound(playerSelection, computerSelection);
     console.log (gameRes);
+    document.querySelector('.gameResult').textContent = gameRes;
     return gameRes
 }
 
@@ -44,7 +45,7 @@ function playRound(playerSelection, computerSelection) {
     if (playerSelection == computerSelection){
         return game = "it's a tie"
     }
-    if (
+    else if (
         (playerSelection == 'Rock' && computerSelection == 'Scissors') ||
         (playerSelection == 'Paper' && computerSelection == 'Rock') ||
         (playerSelection == 'Scissors' && computerSelection == 'Paper')
@@ -54,9 +55,10 @@ function playRound(playerSelection, computerSelection) {
     else {
         game = "You Lose"
     }
+    
     return game
 }
 
-document.querySelector('.gameResult').textContent = gameRes;
+
 
 
